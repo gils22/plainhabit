@@ -1,35 +1,41 @@
-@import './base.css';
+@import 'tailwindcss';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+:root {
+  --font-poppins: 'Poppins', sans-serif;
+  --color-primary: #ff9c06;
+  --color-primary-hover: #e88a00;
+  --color-primary-light: #ffe8c2;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+.text-primary {
+  color: var(--color-primary);
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.bg-primary {
+  background-color: var(--color-primary);
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.hover\:bg-primary:hover {
+  background-color: var(--color-primary-hover);
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+.ring-primary {
+  --tw-ring-color: var(--color-primary);
+}
+
+.btn-primary {
+  @apply rounded px-4 py-2 font-medium text-white shadow;
+  background-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+body {
+  font-family: var(--font-poppins);
 }
