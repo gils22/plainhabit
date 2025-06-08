@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-[#FF9C06] text-white">
+  <footer class="bg-primary text-white">
     <div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-10 md:grid-cols-3">
       <div class="flex flex-col items-center text-center md:items-start md:text-left">
         <img
@@ -29,13 +29,13 @@
       </div>
       <div class="flex flex-col items-center text-center md:items-start md:text-left">
         <h4 class="mb-2 text-lg font-semibold">Hubungi Kami</h4>
-        <p class="flex items-center gap-2 text-sm">
+        <p class="mb-2 flex items-center gap-2 text-sm">
           <i class="fas fa-envelope"></i>
-          info@cuanlyze.com
+          cuanalyze@gmail.com
         </p>
         <p class="mb-4 flex items-center gap-2 text-sm">
           <i class="fas fa-phone-alt"></i>
-          (123) 456-7890
+          0812-1519-0556
         </p>
         <div class="mt-2 flex space-x-4">
           <a href="#" class="transition hover:text-gray-100">

@@ -32,9 +32,8 @@ import { ref, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import FinancialForm from '@/components/FinancialForm.vue'
 import FinancialResult from '@/components/FinancialResult.vue'
-import { checkProductHealth } from '@/api/productHealth'
-import { saveProductResult } from '@/api/saveProductResult'
 import type { FinalResult } from '@/api/saveProductResult'
+import { runCheck, saveResult } from './presenter'
 
 const hasil = ref<FinalResult | null>(null)
 const loading = ref(false)
@@ -54,16 +53,7 @@ async function handleCheck(payload: InitialCheckInput) {
   hasil.value = null
 
   try {
-    const result = await checkProductHealth(payload)
-
-    const finalResult: FinalResult = {
-      ...payload,
-      user_id: userId,
-      cluster: result.cluster,
-      kesehatan: result.label,
-      saran: result.saran,
-    }
-
+    const finalResult = await runCheck(payload, userId)
     hasil.value = finalResult
     await nextTick()
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -79,7 +69,7 @@ async function handleSave() {
   if (!hasil.value) return
 
   try {
-    await saveProductResult(hasil.value)
+    await saveResult(hasil.value)
     alert('Riwayat berhasil disimpan!')
   } catch (err) {
     console.error('Gagal menyimpan:', err)

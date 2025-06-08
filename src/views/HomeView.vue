@@ -1,144 +1,207 @@
 <template>
   <main>
-    <section class="relative overflow-hidden bg-white py-20 text-center">
-      <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 px-4 md:grid-cols-2">
+    <section
+      class="relative overflow-hidden bg-gradient-to-b from-white via-[#FFF7ED] to-[#FFF4E5] py-8"
+      data-aos="fade-up"
+    >
+      <div
+        class="absolute inset-0 z-0 bg-gradient-to-br from-white via-white to-[#FF9C06] opacity-10 blur-[120px]"
+      ></div>
+      <div class="relative z-10 mx-auto max-w-5xl text-center">
         <div
-          v-motion
-          :initial="{ opacity: 0, x: -100, scale: 0.9 }"
-          :enter="{ opacity: 1, x: 0, scale: 1, transition: { duration: 0.7, ease: 'easeOut' } }"
-          class="z-10 text-left"
+          class="text-primary mb-3 inline-block rounded-full bg-[#FFF4E5] px-4 py-1 text-sm font-medium shadow-sm"
         >
-          <h1 class="text-primary mb-6 text-3xl leading-snug font-bold md:text-5xl">
-            Efficient Financial Analysis & Promo Insights for Your Business
-          </h1>
-          <p class="mb-8 text-lg text-gray-700">
-            Gain valuable insights into your business's financial health and promotional efficiency.
-          </p>
-          <router-link
-            to="/cek-kesehatan"
-            class="bg-primary inline-block rounded-md px-6 py-3 font-semibold text-white shadow transition hover:scale-105"
-          >
-            Mulai Cek Kesehatan
-          </router-link>
+          🚀 Solusi Finansial UMKM
         </div>
-
-        <div class="relative z-10 flex items-center justify-center">
-          <div
-            class="bg-primary absolute top-1/2 left-1/2 z-0 h-60 w-60 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20 blur-[100px]"
-          ></div>
-          <div
-            v-motion
-            :initial="{ opacity: 0, x: 100, scale: 0.9 }"
-            :enter="{
-              opacity: 1,
-              x: 0,
-              scale: 1,
-              transition: { duration: 0.8, delay: 0.2, ease: 'easeOut' },
-            }"
-            class="relative z-10"
+        <h1 class="mb-4 text-4xl leading-tight font-bold text-gray-800 md:text-5xl">
+          Analisis Keuangan & Promosi <br />
+          bersama
+          <span class="bg-gradient-to-r from-[#FF9C06] to-orange-400 bg-clip-text text-transparent"
+            >Cuanlyze</span
           >
-            <img
-              src="/images/laptop.png"
-              alt="Dashboard preview"
-              class="w-full max-w-md rounded-xl"
-            />
-          </div>
+        </h1>
+        <p class="mb-6 text-lg text-gray-700">
+          Dapatkan wawasan finansial dan strategi promosi yang didukung AI untuk UMKM Anda.
+        </p>
+        <router-link
+          to="/cek-kesehatan"
+          class="bg-primary inline-block rounded-md px-6 py-3 font-semibold text-white shadow transition hover:scale-105"
+        >
+          Coba Sekarang
+        </router-link>
+        <div class="mt-8 flex justify-center">
+          <img
+            src="/images/hp.png"
+            alt="Preview"
+            class="w-full max-w-[550px] rounded-xl"
+            data-aos="zoom-in"
+          />
         </div>
       </div>
     </section>
 
-    <section class="bg-gray-50 py-20">
-      <div class="mx-auto max-w-6xl px-4">
-        <div
-          v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { duration: 0.5 } }"
-          class="mb-12 text-center"
-        >
-          <h2 class="text-primary mb-4 text-3xl font-bold">
-            How Cuanlyze Can Empower Your Business
+    <section class="bg-gradient-to-b from-[#FFF4E5] via-[#FFFDF8] to-white pt-24 pb-20">
+      <div class="mx-auto grid max-w-6xl items-center gap-16 px-6 md:grid-cols-2">
+        <div class="flex justify-center md:justify-end" data-aos="fade-right" data-aos-delay="100">
+          <img
+            src="/images/hp2.png"
+            alt="App Demo"
+            class="w-full max-w-[420px] drop-shadow-xl md:max-w-[400px] lg:max-w-[440px] xl:max-w-[480px]"
+          />
+        </div>
+
+        <div data-aos="fade-left">
+          <span
+            class="bg-primary mb-3 inline-block rounded-full px-3 py-1 text-sm font-medium text-white"
+          >
+            Use Cases
+          </span>
+          <h2 class="mb-4 text-3xl leading-snug font-bold text-gray-900">
+            Manfaatkan kekuatan <br />alat AI untuk UMKM
           </h2>
-          <p class="mx-auto max-w-xl text-base text-gray-700 md:text-lg">
-            Our AI-powered tools help you monitor financial health and craft effective promotion
-            strategies.
+          <p class="mb-6 text-gray-600">
+            Cuanlyze dirancang agar mudah disesuaikan untuk berbagai kebutuhan bisnis Anda.
           </p>
-        </div>
-
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2">
-          <div
-            v-for="(feature, i) in features"
-            :key="i"
-            v-motion
-            :initial="{ opacity: 0, y: 40 }"
-            :visible="{ opacity: 1, y: 0 }"
-            class="rounded-xl bg-white p-8 text-center shadow-lg transition duration-300 hover:shadow-xl"
-          >
-            <img :src="feature.image" :alt="feature.title" class="mx-auto mb-6 w-20" />
-            <h3 class="mb-2 text-xl font-semibold text-gray-800">{{ feature.title }}</h3>
-            <p class="text-sm text-gray-600">{{ feature.desc }}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-white py-20">
-      <div class="mx-auto max-w-6xl px-4 text-center">
-        <div
-          v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { duration: 0.5 } }"
-          class="mb-10"
-        >
-          <h2 class="text-3xl font-bold">Testimonials</h2>
-        </div>
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <div
-            v-for="(t, i) in testimonials"
-            :key="i"
-            v-motion
-            :initial="{ opacity: 0, y: 20 }"
-            :visible="{ opacity: 1, y: 0 }"
-            class="rounded-xl border bg-gray-50 p-6 text-left transition hover:shadow-md"
-          >
-            <p class="mb-4 italic">"{{ t.quote }}"</p>
-            <div class="font-semibold">{{ t.author }}</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-gray-50 py-20">
-      <div class="mx-auto max-w-4xl px-4">
-        <div
-          v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { duration: 0.5 } }"
-          class="mb-10 text-center"
-        >
-          <h2 class="text-primary text-3xl font-bold">Frequently Asked Questions</h2>
-        </div>
-        <div class="space-y-4">
-          <div
-            v-for="(faq, index) in faqs"
-            :key="index"
-            v-motion
-            :initial="{ opacity: 0, y: 20 }"
-            :visible="{ opacity: 1, y: 0 }"
-            class="overflow-hidden rounded-xl bg-white shadow transition"
-          >
-            <button
-              @click="toggle(index)"
-              class="flex w-full items-center justify-between p-5 text-left text-lg font-semibold text-gray-800 hover:bg-gray-100"
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div
+              class="flex flex-col rounded-xl border bg-white p-4 shadow transition hover:shadow-md"
+              data-aos="fade-up"
+              data-aos-delay="200"
             >
-              {{ faq.question }}
-              <span :class="isOpen(index) ? 'rotate-180' : ''" class="transform transition">
-                ▼
-              </span>
+              <div class="mb-2 flex items-center gap-3">
+                <div
+                  class="bg-primary flex h-9 w-9 items-center justify-center rounded-full text-white"
+                >
+                  <i class="fas fa-chart-line text-base"></i>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-800">Analisis Keuangan</h3>
+              </div>
+              <p class="text-sm text-gray-600">
+                Lihat kinerja penjualan & profit produk Anda dengan insight otomatis.
+              </p>
+            </div>
+
+            <div
+              class="flex flex-col rounded-xl border bg-white p-4 shadow transition hover:shadow-md"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="mb-2 flex items-center gap-3">
+                <div
+                  class="bg-primary flex h-9 w-9 items-center justify-center rounded-full text-white"
+                >
+                  <i class="fas fa-bullhorn text-base"></i>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-800">Strategi Promosi</h3>
+              </div>
+              <p class="text-sm text-gray-600">
+                Dapatkan saran promosi yang sesuai dengan tren dan kategori produk Anda.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="bg-gradient-to-b from-white via-[#FFF7ED] to-[#FFF4E5] py-20"
+      data-aos="fade-up"
+    >
+      <div class="mx-auto max-w-4xl px-4 text-center">
+        <h2 class="mb-4 text-3xl font-bold">Lihat Demo Cuanlyze</h2>
+        <p class="mb-6 text-gray-600">Tonton bagaimana Cuanlyze bekerja secara langsung.</p>
+        <div class="relative mx-auto max-w-3xl">
+          <video ref="videoRef" class="w-full rounded-xl shadow-lg" controls :src="videoSrc" />
+          <button
+            @click="playVideo"
+            class="bg-opacity-40 hover:bg-opacity-50 absolute inset-0 flex items-center justify-center rounded-xl bg-black text-3xl text-white transition"
+          >
+            ▶
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#FFF4E5] py-20" data-aos="fade-up">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 md:grid-cols-2">
+        <div>
+          <h2 class="mb-4 text-3xl leading-snug font-bold">
+            Community Service <br />
+            Is Calling, No Need For Stalling.
+          </h2>
+          <p class="mb-6 text-gray-600">
+            Ingin pengalaman bisnis yang lebih seru? Gabung komunitas kami untuk merasakan serunya
+            bersama teman-teman UMKM lainnya.
+          </p>
+          <button
+            class="bg-primary rounded-full px-6 py-3 font-semibold text-white hover:opacity-90"
+          >
+            Join Community
+          </button>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <img src="/images/profile.svg" class="h-16 w-16 rounded-full" />
+          <img src="/images/profile.svg" class="h-16 w-16 rounded-full" />
+          <img src="/images/profile.svg" class="h-16 w-16 rounded-full" />
+          <img src="/images/profile.svg" class="h-16 w-16 rounded-full" />
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#FFFAF0] py-20" data-aos="fade-up">
+      <div class="mx-auto max-w-6xl px-4">
+        <h2 class="mb-10 text-center text-3xl font-bold">Testimoni Pengguna</h2>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div
+            v-for="(item, i) in testimonials"
+            :key="i"
+            class="rounded-xl bg-white p-6 shadow transition hover:shadow-md"
+          >
+            <p class="text-primary mb-4 text-2xl leading-tight">“</p>
+            <p class="mb-6 text-gray-700">{{ item.quote }}</p>
+            <div class="flex items-center gap-3">
+              <img :src="item.avatar" class="h-10 w-10 rounded-full" />
+              <div>
+                <div class="font-semibold">{{ item.name }}</div>
+                <div class="text-xs text-gray-500">{{ item.role }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-20" data-aos="fade-up">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 items-start gap-12 px-4 md:grid-cols-2">
+        <!-- Left: Form -->
+        <div>
+          <h2 class="mb-2 text-3xl font-bold">Got a Question For Cuanlyze?</h2>
+          <p class="mb-6 text-gray-600">Tanyakan apa pun, kami siap membantu.</p>
+          <div class="flex items-center overflow-hidden rounded-full border">
+            <input
+              type="email"
+              placeholder="Masukkan email Anda"
+              class="flex-1 px-4 py-2 text-sm outline-none"
+            />
+            <button class="bg-primary px-6 py-2 text-sm font-semibold text-white">Submit</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-4 text-gray-700">Mungkin pertanyaan Anda sudah terjawab:</p>
+          <div v-for="(faq, i) in faqs" :key="i" class="border-b py-3">
+            <button
+              @click="toggleFaq(i)"
+              class="flex w-full items-center justify-between text-left text-sm font-medium text-gray-800 focus:outline-none"
+            >
+              <span>{{ faq.question }}</span>
+              <span
+                class="text-gray-400 transition-transform duration-300"
+                :class="{ 'rotate-90': openFaq === i }"
+                >+</span
+              >
             </button>
             <transition name="fade">
-              <div v-if="isOpen(index)" class="px-5 pb-5 text-gray-600">
-                {{ faq.answer }}
-              </div>
+              <p v-if="openFaq === i" class="mt-2 text-sm text-gray-600">{{ faq.answer }}</p>
             </transition>
           </div>
         </div>
@@ -148,61 +211,67 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
-const faqs = ref([
-  {
-    question: 'Apa itu Cuanlyze?',
-    answer:
-      'Cuanlyze adalah platform analitik bisnis yang membantu UMKM mengevaluasi kesehatan keuangan dan memberikan rekomendasi promosi berbasis data.',
-  },
-  {
-    question: 'Apakah saya perlu mendaftar untuk menggunakan fitur?',
-    answer:
-      'Tidak perlu untuk mencoba fitur cek kesehatan, namun Anda perlu mendaftar untuk menyimpan hasil dan mendapatkan rekomendasi lanjutan.',
-  },
-  {
-    question: 'Bagaimana cara kerja rekomendasi promosi?',
-    answer:
-      'Cuanlyze menganalisis data penjualan dan cluster produk untuk memberikan strategi promosi yang sesuai berdasarkan tren dan performa produk Anda.',
-  },
-])
-
-const openIndexes = ref<number[]>([])
-const toggle = (index: number) => {
-  if (openIndexes.value.includes(index)) {
-    openIndexes.value = openIndexes.value.filter((i) => i !== index)
-  } else {
-    openIndexes.value.push(index)
-  }
+const videoSrc = '/videos/demo.mp4'
+const videoRef = ref<HTMLVideoElement | null>(null)
+const playVideo = () => {
+  if (videoRef.value) videoRef.value.play()
 }
-const isOpen = (index: number) => openIndexes.value.includes(index)
-
-const features = [
-  {
-    image: '/images/1.jpg',
-    title: 'Financial Analysis',
-    desc: 'Understand your finances better',
-  },
-  {
-    image: '/images/2.jpg',
-    title: 'Promo Recommendation',
-    desc: 'Unlock smart promotion ideas',
-  },
-]
 
 const testimonials = [
   {
     quote:
       'Cuanlyze sangat membantu saya memahami arus kas dan mengambil keputusan yang lebih baik.',
-    author: 'Ibu Rina, Pemilik Toko Oleh-Oleh',
+    name: 'Ibu Rina',
+    role: 'Pemilik Toko Oleh-Oleh',
+    avatar: '/images/profile.svg',
   },
   {
     quote:
       'Setelah menggunakan rekomendasi promosi dari Cuanlyze, penjualan saya meningkat drastis!',
-    author: 'Pak Budi, Pengusaha Kuliner',
+    name: 'Pak Budi',
+    role: 'Pengusaha Kuliner',
+    avatar: '/images/profile.svg',
+  },
+  {
+    quote: 'Platform ini sangat intuitif dan membantu saya dalam memantau kinerja produk.',
+    name: 'Mbak Dita',
+    role: 'UMKM Fashion',
+    avatar: '/images/profile.svg',
   },
 ]
+
+const openFaq = ref<number | null>(null)
+
+const toggleFaq = (index: number) => {
+  openFaq.value = openFaq.value === index ? null : index
+}
+
+const faqs = [
+  {
+    question: 'Apa itu Cuanlyze?',
+    answer:
+      'Cuanlyze adalah platform AI yang membantu UMKM menganalisis keuangan dan strategi promosi.',
+  },
+  {
+    question: 'Bagaimana cara kerja rekomendasi promosi?',
+    answer: 'Cuanlyze memberi saran promosi berdasarkan kategori produk dan tren pasar.',
+  },
+  {
+    question: 'Apakah datanya disimpan aman?',
+    answer: 'Data disimpan terenkripsi dan hanya bisa diakses oleh pengguna terkait.',
+  },
+]
+
+onMounted(() => {
+  AOS.init({
+    duration: 800,
+    once: false,
+  })
+})
 </script>
 
 <style scoped>

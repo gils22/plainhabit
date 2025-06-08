@@ -13,5 +13,5 @@ app.use(MotionPlugin)
 app.mount('#app')
 
 supabase.auth.getSession().then(({ data }) => {
-  console.log('🧪 Supabase Session:', data.session)
+  console.log('Supabase Session:', data.session)
 })

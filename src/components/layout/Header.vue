@@ -1,22 +1,27 @@
 <template>
-  <header class="fixed top-0 right-0 left-0 z-50 bg-white shadow-sm">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-      <router-link to="/" class="text-primary text-2xl font-bold">Cuanlyze</router-link>
-      <div class="relative flex items-center gap-4">
-        <nav class="hidden space-x-6 text-sm font-medium text-gray-700 md:flex">
-          <router-link to="/" class="hover:text-primary">Beranda</router-link>
-          <router-link to="/cek-kesehatan" class="hover:text-primary">Cek Kesehatan</router-link>
-          <router-link to="/rekomendasi-promosi" class="hover:text-primary"
-            >Rekomendasi</router-link
-          >
-        </nav>
+  <header
+    :class="[
+      'fixed top-4 left-1/2 z-50 w-[95%] max-w-6xl -translate-x-1/2 rounded-2xl bg-white/70 shadow backdrop-blur-md transition-all duration-300',
+      isScrolled ? 'py-2 shadow-md' : 'py-4 shadow-lg',
+    ]"
+  >
+    <div class="mx-auto flex items-center justify-between px-8 md:grid md:grid-cols-3">
+      <div class="text-left">
+        <router-link to="/" class="text-primary text-2xl font-bold">Cuanalyze</router-link>
+      </div>
+      <nav class="hidden justify-center space-x-6 text-sm font-medium text-gray-700 md:flex">
+        <router-link to="/" class="hover:text-primary">Beranda</router-link>
+        <router-link to="/cek-kesehatan" class="hover:text-primary">Cek Kesehatan</router-link>
+        <router-link to="/rekomendasi-promosi" class="hover:text-primary">Rekomendasi</router-link>
+      </nav>
+      <div class="flex items-center justify-end gap-4">
+        <!-- User dropdown (desktop) -->
         <div class="relative hidden md:block" v-if="userEmail" ref="dropdownRef">
           <button @click="toggleDropdown" class="flex items-center gap-2 text-sm">
             <i class="fas fa-user text-gray-600"></i>
             <span>{{ username }}</span>
             <i class="fas fa-chevron-down text-xs text-gray-500"></i>
           </button>
-
           <transition name="fade">
             <div
               v-if="dropdownOpen"
@@ -37,47 +42,45 @@
         <router-link
           to="/login"
           v-else
-          class="hidden rounded bg-[#FF9C06] px-3 py-1 text-sm text-white hover:opacity-90 md:inline-block"
+          class="bg-primary hidden rounded-full px-6 py-2 text-sm text-white hover:opacity-90 md:inline-block"
         >
           Login
         </router-link>
-
-        <!-- Mobile -->
         <button @click="isOpen = !isOpen" class="text-gray-600 md:hidden">
           <i class="fas" :class="isOpen ? 'fa-times' : 'fa-bars'"></i>
         </button>
       </div>
     </div>
-    <div
-      v-if="isOpen"
-      class="space-y-2 bg-white px-4 pb-4 text-sm font-medium text-gray-700 md:hidden"
-    >
-      <router-link to="/" class="block" @click="isOpen = false">Beranda</router-link>
-      <router-link to="/cek-kesehatan" class="block" @click="isOpen = false"
-        >Cek Kesehatan</router-link
-      >
-      <router-link to="/rekomendasi-promosi" class="block" @click="isOpen = false"
-        >Rekomendasi</router-link
-      >
 
-      <div class="border-t pt-2" v-if="userEmail">
-        <router-link to="/profile" class="block" @click="isOpen = false">
-          <i class=""></i> Profil
+    <!-- Mobile menu -->
+    <transition name="fade">
+      <div
+        v-if="isOpen"
+        class="mt-2 space-y-2 bg-white px-4 pb-4 text-sm font-medium text-gray-700 md:hidden"
+      >
+        <router-link to="/" class="block" @click="isOpen = false">Beranda</router-link>
+        <router-link to="/cek-kesehatan" class="block" @click="isOpen = false"
+          >Cek Kesehatan</router-link
+        >
+        <router-link to="/rekomendasi-promosi" class="block" @click="isOpen = false"
+          >Rekomendasi</router-link
+        >
+
+        <div class="border-t pt-2" v-if="userEmail">
+          <router-link to="/profile" class="block" @click="isOpen = false">Profil</router-link>
+          <button @click="logout" class="block w-full text-left text-red-500">Logout</button>
+        </div>
+
+        <router-link
+          v-else
+          to="/login"
+          class="text-primary block border-t pt-2"
+          @click="isOpen = false"
+        >
+          Login
         </router-link>
-        <button @click="logout" class="block w-full text-left text-red-500">
-          <i class=""></i> Logout
-        </button>
       </div>
-
-      <router-link
-        v-else
-        to="/login"
-        class="text-primary block border-t pt-2"
-        @click="isOpen = false"
-      >
-        Login
-      </router-link>
-    </div>
+    </transition>
   </header>
 </template>
 
@@ -89,8 +92,9 @@ import { supabase } from '@/lib/supabase'
 const isOpen = ref(false)
 const dropdownOpen = ref(false)
 const userEmail = ref<string | null>(null)
-const router = useRouter()
 const dropdownRef = ref<HTMLElement | null>(null)
+const isScrolled = ref(false)
+const router = useRouter()
 
 const username = computed(() => {
   return userEmail.value ? userEmail.value.split('@')[0] : ''
@@ -105,11 +109,11 @@ onMounted(async () => {
   }
 
   document.addEventListener('click', handleClickOutside)
+  window.addEventListener('scroll', handleScroll)
 })
 
 supabase.auth.onAuthStateChange((_event, session) => {
   userEmail.value = session?.user?.email || null
-
   if (session?.user?.id) {
     localStorage.setItem('user_id', session.user.id)
   } else {
@@ -119,6 +123,7 @@ supabase.auth.onAuthStateChange((_event, session) => {
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside)
+  window.removeEventListener('scroll', handleScroll)
 })
 
 const toggleDropdown = () => {
@@ -129,6 +134,10 @@ const handleClickOutside = (event: MouseEvent) => {
   if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
     dropdownOpen.value = false
   }
+}
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 10
 }
 
 const logout = async () => {
@@ -144,7 +153,7 @@ const logout = async () => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s;
+  transition: opacity 0.2s ease;
 }
 .fade-enter-from,
 .fade-leave-to {

@@ -96,12 +96,11 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { supabase } from '@/lib/supabase'
-import { getRiwayat, deleteRiwayat } from '@/api/history'
 import * as XLSX from 'xlsx'
 import FileSaver from 'file-saver'
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
+import { fetchUser, fetchRiwayatByUser, deleteRiwayatById } from './presenter'
 
 interface RiwayatItem {
   id: number
@@ -119,31 +118,19 @@ const riwayat = ref<RiwayatItem[]>([])
 const selectedKategori = ref('')
 
 onMounted(async () => {
-  const { data, error } = await supabase.auth.getUser()
-  if (error || !data.user) return
-
-  user.value = data.user
-  await fetchRiwayat()
-})
-
-async function fetchRiwayat() {
   try {
-    const res = await getRiwayat(user.value.id)
-    if (res.success) {
-      riwayat.value = res.data
-    }
+    user.value = await fetchUser()
+    riwayat.value = await fetchRiwayatByUser(user.value.id)
   } catch (err) {
-    console.error('Gagal mengambil riwayat:', err)
+    console.error('Error:', err)
   }
-}
+})
 
 async function hapusRiwayat(id: number) {
   if (!confirm('Yakin ingin menghapus riwayat ini?')) return
   try {
-    const res = await deleteRiwayat(id)
-    if (res.success) {
-      riwayat.value = riwayat.value.filter((r) => r.id !== id)
-    }
+    await deleteRiwayatById(id)
+    riwayat.value = riwayat.value.filter((r) => r.id !== id)
   } catch (err) {
     console.error('Gagal hapus riwayat:', err)
   }
@@ -166,11 +153,9 @@ function exportToExcel() {
     Kesehatan: r.kesehatan,
     Saran: r.saran,
   }))
-
   const worksheet = XLSX.utils.json_to_sheet(rows)
   const workbook = XLSX.utils.book_new()
   XLSX.utils.book_append_sheet(workbook, worksheet, 'Riwayat')
-
   const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
   const blob = new Blob([excelBuffer], { type: 'application/octet-stream' })
   FileSaver.saveAs(blob, 'riwayat_cek_produk.xlsx')

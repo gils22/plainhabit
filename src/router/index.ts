@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import CheckHealthView from '@/views/FinancialCheck.vue'
-import PromoView from '@/views/PromoView.vue'
+import CheckHealthView from '@/views/financialcheck/FinancialCheck.vue'
+import PromoView from '@/views/promo/PromoView.vue'
 import { supabase } from '@/lib/supabase'
 
 const routes = [
@@ -25,18 +25,23 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/LoginView.vue'),
+    component: () => import('@/views/login/LoginView.vue'),
   },
   {
     path: '/register',
     name: 'Register',
-    component: () => import('@/views/RegisterView.vue'),
+    component: () => import('@/views/register/RegisterView.vue'),
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: () => import('@/views/ProfileView.vue'),
+    component: () => import('@/views/profile/ProfileView.vue'),
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/404.vue'),
   },
 ]
 
