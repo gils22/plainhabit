@@ -1,4 +1,4 @@
-# cuan-analyze-fe
+# Plain-Habit
 
 This template should help get you started developing with Vue 3 in Vite.
 
