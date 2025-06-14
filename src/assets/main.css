@@ -2,7 +2,7 @@
 
 :root {
   --font-poppins: 'Poppins', sans-serif;
-  --color-primary: #ff9c06;
+  --color-primary: #0069b2;
   --color-primary-hover: #e88a00;
   --color-primary-light: #ffe8c2;
 }
@@ -27,15 +27,29 @@
   --tw-ring-color: var(--color-primary);
 }
 
-.btn-primary {
-  @apply rounded px-4 py-2 font-medium text-white shadow;
-  background-color: var(--color-primary);
-}
-
 .btn-primary:hover {
   background-color: var(--color-primary-hover);
 }
 
 body {
   font-family: var(--font-poppins);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #9ca3af;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #6b7280;
+}
+
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }

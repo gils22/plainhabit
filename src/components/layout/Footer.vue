@@ -31,7 +31,7 @@
         <h4 class="mb-2 text-lg font-semibold">Hubungi Kami</h4>
         <p class="mb-2 flex items-center gap-2 text-sm">
           <i class="fas fa-envelope"></i>
-          cuanalyze@gmail.com
+          plainhabit@gmail.com
         </p>
         <p class="mb-4 flex items-center gap-2 text-sm">
           <i class="fas fa-phone-alt"></i>
