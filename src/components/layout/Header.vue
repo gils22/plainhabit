@@ -46,11 +46,26 @@
       </nav>
 
       <div class="text-primary flex items-center gap-6">
-        <router-link to="/wishlist" class="hover:transition">
+        <!-- Wishlist with badge -->
+        <router-link to="/wishlist" class="relative hover:transition">
           <Heart class="h-6 w-6" />
+          <span
+            v-if="wishlistQty > 0"
+            class="absolute -top-2 -right-2 rounded-full bg-red-500 px-2 py-0.5 text-xs font-bold text-white"
+          >
+            {{ wishlistQty }}
+          </span>
         </router-link>
-        <router-link to="/cart" class="hover:transition">
+
+        <!-- Cart with badge -->
+        <router-link to="/cart" class="relative hover:transition">
           <ShoppingCart class="h-6 w-6" />
+          <span
+            v-if="totalQty > 0"
+            class="absolute -top-2 -right-2 rounded-full bg-red-500 px-2 py-0.5 text-xs font-bold text-white"
+          >
+            {{ totalQty }}
+          </span>
         </router-link>
       </div>
     </div>
@@ -68,13 +83,23 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 import { ShoppingCart, Heart } from 'lucide-vue-next'
+import { useCartStore } from '@/stores/cart'
+import { useWishlistStore } from '@/stores/wishlist'
+import { storeToRefs } from 'pinia'
 
 const route = useRoute()
+const cartStore = useCartStore()
+const wishlistStore = useWishlistStore()
+
+const { items: cartItems } = storeToRefs(cartStore)
+const { items: wishlistItems } = storeToRefs(wishlistStore)
+
+const totalQty = computed(() => cartItems.value.reduce((acc, item) => acc + item.qty, 0))
+const wishlistQty = computed(() => wishlistItems.value.length)
 
 const isActive = (path: string) => route.path === path
-
 const isScrolled = ref(false)
 
 const handleScroll = () => {

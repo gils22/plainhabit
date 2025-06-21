@@ -9,6 +9,9 @@ import ProfileView from '@/views/ProfileView.vue'
 import NotFound from '@/views/404.vue'
 import AboutView from '@/views/AboutView.vue'
 import ContactView from '@/views/ContactView.vue'
+import CartView from '@/views/CartView.vue'
+import WishlistView from '@/views/WishlistView.vue'
+import CheckoutView from '@/views/CheckoutView.vue'
 
 const routes = [
   {
@@ -25,6 +28,21 @@ const routes = [
     path: '/product/:id',
     name: 'ProductDetail',
     component: DetailProduct,
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: CartView,
+  },
+  {
+    path: '/wishlist',
+    name: 'Wishlist',
+    component: WishlistView,
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: CheckoutView,
   },
   {
     path: '/about',

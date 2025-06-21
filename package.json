@@ -23,6 +23,8 @@
     "jspdf-autotable": "^5.0.2",
     "leaflet": "^1.9.4",
     "lucide-vue-next": "^0.515.0",
+    "pinia": "^3.0.3",
+    "pinia-plugin-persistedstate": "^4.3.0",
     "sweetalert2": "^11.22.0",
     "swiper": "^11.2.8",
     "tailwind-scrollbar": "^4.0.2",

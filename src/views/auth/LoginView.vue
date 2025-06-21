@@ -28,16 +28,21 @@
           <div class="relative">
             <input
               v-model="password"
-              type="password"
-              class="focus:border-primary w-full rounded-md border px-4 py-2 pl-10 text-sm shadow focus:outline-none"
+              :type="showPassword ? 'text' : 'password'"
+              class="focus:border-primary w-full rounded-md border px-4 py-2 pr-10 pl-10 text-sm shadow focus:outline-none"
               required
             />
             <span class="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400">
               <i class="fas fa-lock text-sm"></i>
             </span>
-          </div>
-          <div class="mt-1 text-right">
-            <a href="#" class="text-primary text-xs hover:underline">Forgot Password?</a>
+
+            <button
+              type="button"
+              @click="togglePassword"
+              class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400"
+            >
+              <component :is="showPassword ? EyeOff : Eye" class="h-5 w-5" />
+            </button>
           </div>
         </div>
 
@@ -59,18 +64,43 @@
             Create Account
           </router-link>
         </p>
+
+        <div
+          v-if="errorMessage"
+          class="mt-4 rounded bg-red-100 p-3 text-center text-sm text-red-600"
+        >
+          {{ errorMessage }}
+        </div>
       </form>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { Eye, EyeOff } from 'lucide-vue-next'
 
 const email = ref('')
 const password = ref('')
+const errorMessage = ref('')
+const showPassword = ref(false)
+
+const router = useRouter()
+
+function togglePassword() {
+  showPassword.value = !showPassword.value
+}
 
 function handleLogin() {
-  console.log('Login with:', email.value, password.value)
+  const dummyEmail = 'gilang@gmail.com'
+  const dummyPassword = '123456'
+
+  if (email.value === dummyEmail && password.value === dummyPassword) {
+    localStorage.setItem('isLoggedIn', 'true')
+    router.push('/profile')
+  } else {
+    errorMessage.value = 'Email atau password salah!'
+  }
 }
 </script>
