@@ -46,7 +46,6 @@
       </nav>
 
       <div class="text-primary flex items-center gap-6">
-        <!-- Wishlist with badge -->
         <router-link to="/wishlist" class="relative hover:transition">
           <Heart class="h-6 w-6" />
           <span
@@ -57,7 +56,6 @@
           </span>
         </router-link>
 
-        <!-- Cart with badge -->
         <router-link to="/cart" class="relative hover:transition">
           <ShoppingCart class="h-6 w-6" />
           <span

@@ -24,32 +24,82 @@
 </template>
 
 <script setup lang="ts">
-const recommendedProducts = [
+import { ref, onMounted } from 'vue'
+
+const recommendedProductsFull = [
+  {
+    id: 1,
+    name: 'Plainhabit Basic Putih',
+    price: 55000,
+    image: '/images/products/kaos-putih.png',
+    color: 'Putih',
+  },
+  {
+    id: 2,
+    name: 'Plainhabit Basic Hitam',
+    price: 55000,
+    image: '/images/products/kaos-hitam.png',
+    color: 'Hitam',
+  },
   {
     id: 3,
-    name: 'Kaos Polos Abu',
+    name: 'Plainhabit Basic Begie',
     price: 55000,
-    image: '/images/products/kaos-abu.png',
+    image: '/images/products/kaos-begie.png',
+    color: 'Abu',
   },
   {
     id: 4,
-    name: 'Kaos Polos Navy',
-    price: 60000,
-    image: '/images/products/kaos-navy.png',
+    name: 'Plainhabit Basic Green Stone',
+    price: 55000,
+    image: '/images/products/kaos-green-stone.png',
+    color: 'Cream',
   },
   {
     id: 5,
-    name: 'Kaos Oversize Cream',
-    price: 65000,
-    image: '/images/products/kaos-cream.png',
+    name: 'Plainhabit Basic Sky Blue',
+    price: 55000,
+    image: '/images/products/kaos-skyblue.png',
+    color: 'Putih',
   },
   {
     id: 6,
-    name: 'Kaos Polos Army',
-    price: 59000,
-    image: '/images/products/kaos-army.png',
+    name: 'Plainhabit Basic Biru Dongker',
+    price: 55000,
+    image: '/images/products/kaos-biru-dongker.png',
+    color: 'Hitam',
+  },
+  {
+    id: 7,
+    name: 'Plainhabit Basic Honey',
+    price: 55000,
+    image: '/images/products/kaos-honey.png',
+    color: 'Abu',
+  },
+  {
+    id: 8,
+    name: 'Plainhabit Basic Mustard',
+    price: 55000,
+    image: '/images/products/kaos-mustard.png',
+    color: 'Cream',
+  },
+  {
+    id: 9,
+    name: 'Plainhabit Basic Maroon',
+    price: 55000,
+    image: '/images/products/kaos-maroon.png',
+    color: 'Cream',
   },
 ]
+
+const recommendedProducts = ref<typeof recommendedProductsFull>([])
+function getRandomProducts(products: typeof recommendedProductsFull, count: number) {
+  const shuffled = [...products].sort(() => 0.5 - Math.random())
+  return shuffled.slice(0, count)
+}
+onMounted(() => {
+  recommendedProducts.value = getRandomProducts(recommendedProductsFull, 4)
+})
 
 const formatPrice = (price: number) =>
   new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(price)

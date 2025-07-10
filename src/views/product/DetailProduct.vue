@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen bg-white pt-36 pb-20">
+  <section class="mb-12 min-h-screen bg-white pt-36 pb-20">
     <div class="mx-auto max-w-7xl px-4 md:px-8">
       <div class="text-primary mb-6 text-sm">
         <router-link to="/product" class="hover:underline">Product</router-link> /
@@ -62,7 +62,7 @@
             <p class="mb-1 font-medium">Colour:</p>
             <div class="flex items-center gap-2">
               <span
-                class="block h-5 w-5 rounded-full border"
+                class="block h-5 w-5 rounded-full border border-white"
                 :style="{ backgroundColor: product.colorHex }"
               ></span>
               <span class="text-sm text-gray-700">{{ product.color }}</span>
@@ -88,20 +88,14 @@
             </div>
           </div>
 
-          <div class="mt-6 flex flex-col items-center gap-4 sm:flex-row">
+          <div class="mt-6 flex flex-col items-start gap-4 sm:flex-row">
             <div class="flex items-center rounded-lg border px-4 py-2">
               <button @click="qty--" :disabled="qty <= 1" class="px-3 text-lg">-</button>
-              <span class="px-4">{{ qty }}</span>
+              <span class="px-2">{{ qty }}</span>
               <button @click="qty++" class="px-3 text-lg">+</button>
             </div>
 
-            <button
-              @click="addToCart"
-              :disabled="!selectedSize"
-              class="bg-primary flex items-center gap-2 rounded-lg px-6 py-3 font-semibold text-white shadow transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              Tambahkan ke Keranjang
-            </button>
+            <AddToCartButton :disabled="!selectedSize" :onAdd="addToCart" />
           </div>
         </div>
       </div>
@@ -124,6 +118,8 @@ import Recommendation from '@/views/product/Recommendation.vue'
 import Review from '@/views/product/Review.vue'
 import { useCartStore } from '@/stores/cart'
 import { useWishlistStore } from '@/stores/wishlist'
+import { watchEffect } from 'vue'
+import AddToCartButton from '@/components/common/AddToCartButton.vue'
 
 const cartStore = useCartStore()
 const wishlistStore = useWishlistStore()
@@ -136,7 +132,7 @@ const qty = ref(1)
 const products = [
   {
     id: 1,
-    name: 'Kaos Polos Putih',
+    name: 'Plainhabit Basic Putih',
     price: 55000,
     color: 'Putih',
     colorHex: '#f5f5f5',
@@ -149,12 +145,75 @@ const products = [
   },
   {
     id: 2,
-    name: 'Kaos Polos Hitam',
+    name: 'Plainhabit Basic Hitam',
     price: 55000,
     color: 'Hitam',
     colorHex: '#000000',
     description: 'Kaos polos hitam dengan bahan halus dan tahan lama.',
     images: ['/images/products/kaos-hitam.png', '/images/products/kaos-hitam-2.png'],
+  },
+  {
+    id: 3,
+    name: 'Plainhabit Basic Begie',
+    price: 55000,
+    color: 'Begie',
+    colorHex: '#edce87',
+    description: 'Kaos polos warna begie yang elegan, cocok untuk gaya minimalis.',
+    images: ['/images/products/kaos-begie.png', '/images/products/kaos-begie-2.png'],
+  },
+  {
+    id: 4,
+    name: 'Plainhabit Basic Green Stone',
+    price: 55000,
+    color: 'Green Stone',
+    colorHex: '#64a184',
+    description: 'Kaos polos green stone dengan nuansa earthy tone yang kalem.',
+    images: ['/images/products/kaos-green-stone.png', '/images/products/kaos-green-stone-2.png'],
+  },
+  {
+    id: 5,
+    name: 'Plainhabit Basic Sky Blue',
+    price: 55000,
+    color: 'Sky Blue',
+    colorHex: '#76b2e3',
+    description: 'Kaos polos sky blue yang segar dan menenangkan.',
+    images: ['/images/products/kaos-skyblue.png', '/images/products/kaos-skyblue-2.png'],
+  },
+  {
+    id: 6,
+    name: 'Plainhabit Basic Biru Dongker',
+    price: 55000,
+    color: 'Biru Dongker',
+    colorHex: '#1c2a44',
+    description: 'Kaos polos biru dongker dengan kesan tegas dan maskulin.',
+    images: ['/images/products/kaos-biru-dongker.png', '/images/products/kaos-biru-dongker-2.png'],
+  },
+  {
+    id: 7,
+    name: 'Plainhabit Basic Honey',
+    price: 55000,
+    color: 'Honey',
+    colorHex: '#cc7f26',
+    description: 'Kaos polos warna honey dengan sentuhan hangat dan elegan.',
+    images: ['/images/products/kaos-honey.png', '/images/products/kaos-honey-2.png'],
+  },
+  {
+    id: 8,
+    name: 'Plainhabit Basic Mustard',
+    price: 55000,
+    color: 'Mustard',
+    colorHex: '#ffac1f',
+    description: 'Kaos polos mustard yang cerah untuk tampilan standout.',
+    images: ['/images/products/kaos-mustard.png', '/images/products/kaos-mustard-2.png'],
+  },
+  {
+    id: 9,
+    name: 'Plainhabit Basic Maroon',
+    price: 55000,
+    color: 'Maroon',
+    colorHex: '#7c0000',
+    description: 'Kaos polos maroon yang bold dan stylish.',
+    images: ['/images/products/kaos-maroon.png', '/images/products/kaos-maroon-2.png'],
   },
 ]
 
@@ -177,8 +236,6 @@ const addToCart = () => {
     qty: qty.value,
     image: product.value.images[0],
   })
-
-  alert('Produk berhasil ditambahkan ke keranjang.')
 }
 
 const isInWishlist = computed(() => {
@@ -209,4 +266,11 @@ const toggleWishlist = () => {
     wishlistStore.addItem(wishlistItem)
   }
 }
+
+watchEffect(() => {
+  const newProductId = parseInt(route.params.id as string)
+  const foundProduct = products.find((p) => p.id === newProductId) || null
+  product.value = foundProduct
+  selectedImage.value = foundProduct?.images[0] || ''
+})
 </script>

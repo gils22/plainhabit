@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen bg-white pt-32 pb-16">
+  <section class="mb-12 min-h-screen bg-white pt-32 pb-16">
     <div class="mx-auto max-w-7xl px-4 md:px-8">
       <div class="mb-12 text-center" data-aos="fade-up">
         <h2 class="text-3xl font-bold text-sky-700 md:text-4xl">Koleksi Produk</h2>
@@ -11,7 +11,7 @@
       <LoadingSpinner v-if="isLoading" />
       <div
         v-else
-        class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3"
+        class="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-3"
         data-aos="fade-up"
         data-aos-delay="100"
       >
@@ -106,30 +106,65 @@ onMounted(() => {
     products.value = [
       {
         id: 1,
-        name: 'Kaos Polos Putih',
+        name: 'Plainhabit Basic Putih',
         price: 55000,
         image: '/images/products/kaos-putih.png',
         color: 'Putih',
       },
       {
         id: 2,
-        name: 'Kaos Polos Hitam',
+        name: 'Plainhabit Basic Hitam',
         price: 55000,
-        image: '/images/products/kaos-putih.png',
+        image: '/images/products/kaos-hitam.png',
         color: 'Hitam',
       },
       {
         id: 3,
-        name: 'Kaos Polos Abu',
+        name: 'Plainhabit Basic Begie',
         price: 55000,
-        image: '/images/products/kaos-putih.png',
+        image: '/images/products/kaos-begie.png',
         color: 'Abu',
       },
       {
         id: 4,
-        name: 'Kaos Polos Cream',
+        name: 'Plainhabit Basic Green Stone',
         price: 55000,
-        image: '/images/products/kaos-putih.png',
+        image: '/images/products/kaos-green-stone.png',
+        color: 'Cream',
+      },
+      {
+        id: 5,
+        name: 'Plainhabit Basic Sky Blue',
+        price: 55000,
+        image: '/images/products/kaos-skyblue.png',
+        color: 'Putih',
+      },
+      {
+        id: 6,
+        name: 'Plainhabit Basic Biru Dongker',
+        price: 55000,
+        image: '/images/products/kaos-biru-dongker.png',
+        color: 'Hitam',
+      },
+      {
+        id: 7,
+        name: 'Plainhabit Basic Honey',
+        price: 55000,
+        image: '/images/products/kaos-honey.png',
+        color: 'Abu',
+      },
+      {
+        id: 8,
+        name: 'Plainhabit Basic Mustard',
+        price: 55000,
+        image: '/images/products/kaos-mustard.png',
+        color: 'Cream',
+      },
+      {
+        id: 9,
+        name: 'Plainhabit Basic Maroon',
+        price: 55000,
+        image: '/images/products/kaos-maroon.png',
         color: 'Cream',
       },
     ]
