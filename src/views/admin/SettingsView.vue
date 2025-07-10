@@ -96,6 +96,7 @@ onMounted(() => {
       description: 'Elegance in Simplicity, Cultivate the Habit.',
       logo: '/images/logo.png',
       phone: '+6281216190556',
+      instagram: '@plainhabit',
       address: 'Yogyakarta',
     }
     logoPreview.value = form.value.logo
